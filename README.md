@@ -1,5 +1,5 @@
 # Calci
-A simple **GUI** calculator creator using **tkinter** library in *Python*.
+A simple **GUI** calculator created using **tkinter** library in *Python*.
 
 **Requirements:** <br>
 1. Some Python package should be present on the machine.
