@@ -1,60 +1,64 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
+Created on Fri Dec  8 18:46:52 2017
 
-This is a temporary script file.
+@author: mohit
 """
 
-import tkinter as tk
+from tkinter import *
+from tkinter import ttk
 
-class window(tk.Frame):
-    def __init__(self,master=None):
-        super().__init__(master)
-        self.pack()
-        self.create_widgets()
-    
-    def create_widgets(self):
-        
-        self.input = tk.Entry(self).grid(row=0,column=0,columnspan=4,pady=3)
-        
-        self.one = tk.Button(self,text='1',width=3).grid(row=4,column=1)
-        
-        self.two = tk.Button(self,text='2',width=3).grid(row=4,column=2)
-        
-        self.three = tk.Button(self,text='3',width=3).grid(row=4,column=3)
-        
-        self.four = tk.Button(self,text='4',width=3).grid(row=3,column=1)
-        
-        self.five = tk.Button(self,text='5',width=3).grid(row=3,column=2)
-        
-        self.six = tk.Button(self,text='6',width=3).grid(row=3,column=3)
-        
-        self.seven = tk.Button(self,text='7',width=3).grid(row=2,column=1)
-        
-        self.eight = tk.Button(self,text='8',width=3).grid(row=2,column=2)
-        
-        self.nine = tk.Button(self,text='9',width=3).grid(row=2,column=3)
-        
-        self.AC = tk.Button(self,text='AC',width=3).grid(row=1,column=3)
-        
-        self.backspace = tk.Button(self,text='back',width=10).grid(row=1,column=1,columnspan=2)
-        
-        self.percent = tk.Button(self,text='%',width=3).grid(row=5,column=1)
-        
-        self.decimal = tk.Button(self,text='.',width=3).grid(row=5,column=3)
-        
-        self.zero = tk.Button(self,text='0',width=3).grid(row=5,column=2)
-        
-        self.divide = tk.Button(self,text='/',width=3).grid(row=1,column=4)
-        
-        self.multiply = tk.Button(self,text='*',width=3).grid(row=2,column=4)
-        
-        self.subtract = tk.Button(self,text='-',width=3).grid(row=3,column=4)
-        
-        self.add = tk.Button(self,text='+',width=3).grid(row=4,column=4)
-        
-        self.equal = tk.Button(self,text='=',width=3).grid(row=5,column=4)
-        
-root = tk.Tk()
-App = window(master=root)
-App.mainloop()
+root = Tk()
+root.title("Calci")
+mainframe = ttk.Frame(root, padding = "3 3 12 12")
+mainframe.grid(column = 0, row = 0, sticky = "N S W E")
+mainframe.columnconfigure(0, weight = 1)
+mainframe.rowconfigure(0, weight = 1)
+
+num = StringVar()
+
+def update(a):
+    try:
+        num.set(str(num.get())+a)
+    except:
+        pass
+
+def calculate():
+    try:
+        num.set(eval(str(num.get())))
+    except:
+        num.set('Syntax Error')
+
+def back():
+    try:
+        num.set(num.get()[:-1])
+    except:
+        pass
+
+num_entry = ttk.Entry(mainframe, width = 40, textvariable = num)
+num_entry.grid(column = 1, row = 1, columnspan = 4, pady = 5)
+
+ttk.Button(mainframe, text = "BACK", command = lambda: back()).grid(column = 1, row = 2)
+ttk.Button(mainframe, text = "AC", command = lambda: num.set(''), width = 20).grid(column = 2, row = 2, columnspan = 2)
+ttk.Button(mainframe, text = "/", command = lambda: update('/')).grid(column = 4, row = 2)
+ttk.Button(mainframe, text = "7", command = lambda: update('7')).grid(column = 1, row = 3)
+ttk.Button(mainframe, text = "8", command = lambda: update('8')).grid(column = 2, row = 3)
+ttk.Button(mainframe, text = "9", command = lambda: update('9')).grid(column = 3, row = 3)
+ttk.Button(mainframe, text = "*", command = lambda: update('*')).grid(column = 4, row = 3)
+ttk.Button(mainframe, text = "4", command = lambda: update('4')).grid(column = 1, row = 4)
+ttk.Button(mainframe, text = "5", command = lambda: update('5')).grid(column = 2, row = 4)
+ttk.Button(mainframe, text = "6", command = lambda: update('6')).grid(column = 3, row = 4)
+ttk.Button(mainframe, text = "-", command = lambda: update('-')).grid(column = 4, row = 4)
+ttk.Button(mainframe, text = "1", command = lambda: update('1')).grid(column = 1, row = 5)
+ttk.Button(mainframe, text = "2", command = lambda: update('2')).grid(column = 2, row = 5)
+ttk.Button(mainframe, text = "3", command = lambda: update('3')).grid(column = 3, row = 5)
+ttk.Button(mainframe, text = "+", command = lambda: update('+')).grid(column = 4, row = 5)
+ttk.Button(mainframe, text = "%", command = lambda: update('%')).grid(column = 1, row = 6)
+ttk.Button(mainframe, text = "0", command = lambda: update('0')).grid(column = 2, row = 6)
+ttk.Button(mainframe, text = ".", command = lambda: update('.')).grid(column = 3, row = 6)
+equal_to = ttk.Button(mainframe, text = "=", command = calculate).grid(column = 4, row = 6)
+
+
+num_entry.focus()
+root.mainloop()
