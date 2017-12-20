@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Dec  8 18:46:52 2017
-
 @author: mohit
 """
 
@@ -39,8 +38,9 @@ def back():
 num_entry = ttk.Entry(mainframe, width = 40, textvariable = num)
 num_entry.grid(column = 1, row = 1, columnspan = 4, pady = 5)
 
-ttk.Button(mainframe, text = "BACK", command = lambda: back()).grid(column = 1, row = 2)
-ttk.Button(mainframe, text = "AC", command = lambda: num.set(''), width = 20).grid(column = 2, row = 2, columnspan = 2)
+ttk.Button(mainframe, text = "(", command = lambda: update('(')).grid(column = 1, row = 2)
+ttk.Button(mainframe, text = ")", command = lambda: update(')')).grid(column = 2, row = 2)
+ttk.Button(mainframe, text = "AC", command = lambda: num.set('')).grid(column = 3, row = 2)
 ttk.Button(mainframe, text = "/", command = lambda: update('/')).grid(column = 4, row = 2)
 ttk.Button(mainframe, text = "7", command = lambda: update('7')).grid(column = 1, row = 3)
 ttk.Button(mainframe, text = "8", command = lambda: update('8')).grid(column = 2, row = 3)
@@ -54,11 +54,10 @@ ttk.Button(mainframe, text = "1", command = lambda: update('1')).grid(column = 1
 ttk.Button(mainframe, text = "2", command = lambda: update('2')).grid(column = 2, row = 5)
 ttk.Button(mainframe, text = "3", command = lambda: update('3')).grid(column = 3, row = 5)
 ttk.Button(mainframe, text = "+", command = lambda: update('+')).grid(column = 4, row = 5)
-ttk.Button(mainframe, text = "%", command = lambda: update('%')).grid(column = 1, row = 6)
+ttk.Button(mainframe, text = "BACK", command = lambda: back()).grid(column = 1, row = 6)
 ttk.Button(mainframe, text = "0", command = lambda: update('0')).grid(column = 2, row = 6)
 ttk.Button(mainframe, text = ".", command = lambda: update('.')).grid(column = 3, row = 6)
 equal_to = ttk.Button(mainframe, text = "=", command = calculate).grid(column = 4, row = 6)
-
 
 num_entry.focus()
 root.mainloop()
