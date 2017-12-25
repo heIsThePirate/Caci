@@ -10,7 +10,7 @@ from tkinter import ttk
 
 root = Tk()
 root.title("Calci")
-mainframe = ttk.Frame(root, padding = "3 3 12 12")
+mainframe = ttk.Frame(root, padding = "12 12 12 12")
 mainframe.grid(column = 0, row = 0, sticky = "N S W E")
 mainframe.columnconfigure(0, weight = 1)
 mainframe.rowconfigure(0, weight = 1)
@@ -23,7 +23,7 @@ def update(a):
     except:
         pass
 
-def calculate():
+def calculate(*args):
     try:
         num.set(eval(str(num.get())))
     except:
@@ -59,5 +59,7 @@ ttk.Button(mainframe, text = "0", command = lambda: update('0')).grid(column = 2
 ttk.Button(mainframe, text = ".", command = lambda: update('.')).grid(column = 3, row = 6)
 equal_to = ttk.Button(mainframe, text = "=", command = calculate).grid(column = 4, row = 6)
 
+root.bind('<Return>', calculate)
 num_entry.focus()
+root.resizable(False, False)
 root.mainloop()
